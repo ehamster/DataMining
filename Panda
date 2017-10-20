@@ -1,0 +1,4 @@
+1.Series:
+  one dimensional, any type
+  
+  df.loc[行标签,列标签]
