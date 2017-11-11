@@ -3,6 +3,7 @@ P1. use Iterator to select rows from dataframe is too slow!!!!
   Answer:Use dataframe to do select row or columns. It is faster than list and need less memory.
   
 P2.pivot_table and melt function need too much memory. 16GB is not enough!!!
-  A: Dont use pivote_table and melt function when data is so large. U can divide dataframe into a lot of little dataframes.
+  A: Dont use pivote_table and melt function when data is so large. U can divide dataframe into a lot of little dataframes.Then 
+  use unstack and stack to do change index
   
  
