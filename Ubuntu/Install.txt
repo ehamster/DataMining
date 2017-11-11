@@ -1,0 +1,17 @@
+1.Install Sublime in Ubuntu
+    输入以下命令安装：
+
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+sudo apt-get install sublime-text-installer
+
+    1
+    2
+    3
+
+    输入以下命令卸载：
+
+sudo apt-get remove sublime-text-installer
+
+
+2.
