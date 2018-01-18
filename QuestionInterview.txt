@@ -47,4 +47,33 @@ Q13.Collaborative filtering?
 is used by most of the recommender systems . is a method to do automatic predictions about 
 the interests of a user by collecting preferences or taste 
 
-Q14
+Q14  What is the difference between Cluster and Systematic Sampling?
+Cluster sampling: divide population into clusters and then take simple random sample from each clusters. less costs
+Systematic sampling: select random starting point in population
+
+Q15:Are expected value and mean value different?
+Mean value is the only value that comes from the sampling data.
+Expected value is the population mean.
+
+Q16 What does P-value signify about the statistical data?
+P-value is used to determine the significance of results after a hypothesis test 
+p -value between 0 and 1
+P- Value > 0.05  which means the null hypothesis cannot be rejected.
+P-value < 0.05  which means the null hypothesis can be rejected.
+P-value=0.05is the marginal value indicating it is possible to go either way.
+
+Q17 Do gradient descent methods always converge to same point?
+No, they do not because in some cases it reaches a local minima or a local optima point
+
+Q18 What are categorical variables?
+can be category. can be asign to particular group
+
+Q19 A test has a true positive rate of 100% and false positive rate of 5%. There is a population with a 1/1000 rate of having the condition the test identifies. Considering a positive test, what is the probability of having that condition?
+
+
+Q20  How you can make data normal using Box-Cox transformation?
+A Box Cox transformation is a way to transform non-normal dependent variables into a normal shape. 
+
+Q21  What is the difference between Supervised Learning an Unsupervised Learning?
+Algorithm can learm from training data and apply to test data, is supervised learning
+Algorithm does not learn anything or there is no traing data, is unsupervised learning
