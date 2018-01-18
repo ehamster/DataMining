@@ -1,0 +1,50 @@
+Q1. Difference between Data science machine learning and AI
+DS: Use machine Learning technique to do analysis and prediction 
+Machine Learning: is a subset of AI。 is a technique
+AI: It is a combination of both business and technical aspects.
+
+Q2.Python or R :
+Python. a lot of libarady: pandas,numpy
+
+Q3. Which technique is used to predict categorical responses?
+Classification technique
+
+Q4. What is logistic regression? Or State an example when you have used logistic regression recently.
+Logistic Regression refers as logit model. Predict binary outcome from a combination of variable. 
+prediction of subscribe. survive analysis
+
+Q5. What are Recommender Systems?
+predict the users' ratings to a product
+
+Q6.
+Cleaning data from multiple sources to transform it into a format that data scientists can work with is important.
+as the volume of data increate, we need spend more time on cleaning data.
+
+Q7.  Differentiate between univariate, bivariate and multivariate analysis.
+univariate:bar charts pie charts of sale
+bivariable: is used to find out if there is a relationship between two different variables
+multivariate: 3 or more
+
+Q8.  What do you understand by the term Normal Distribution?
+data is distributed around a central value without any bias to the left or right and
+reaches normal distribution in the form of a bell shaped curve.
+
+Q9.What is Linear Regression?
+linear regression is a linear approach for modeling the relationship between y
+and  one or more explanatory variables X
+
+Q10  What is Interpolation and Extrapolation?
+Interpolation: Estimating a value from 2 known values from a list of values. 
+Extrapolation: is approximating a value by extending a known set of values.
+
+Q11.What is power analysis?
+An experimental design technique for determining the effect of a given sample size.
+
+Q12. What is K-means? How can you select K for K-means?
+clustering
+
+Q13.Collaborative filtering?
+is used by most of the recommender systems . is a method to do automatic predictions about 
+the interests of a user by collecting preferences or taste 
+
+Q14
