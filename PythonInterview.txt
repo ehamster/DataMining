@@ -1,0 +1,26 @@
+Q1. What is Python?
+High level object-oriented scripting language
+
+Q2. Feature of Python
+1. support functions, structures
+2.provide high level dynamic data type
+3. support automatic garbage collection
+
+Q3.PythonPaTH
+tell interpreter where is the module file
+
+Q4 supported data types in Python
+Numbers
+String
+List
+Tuple
+Dictionary
+
+Q5 tuples?
+immutable  (1,2,3,4)
+
+Q6 difference between list and tuple
+Lists are enclosed in brackets ( [ ] ) and their elements and size can be changed,
+while tuples are enclosed in parentheses ( ( ) ) and cannot be updated
+
+Q7
