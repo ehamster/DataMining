@@ -23,4 +23,19 @@ Q6 difference between list and tuple
 Lists are enclosed in brackets ( [ ] ) and their elements and size can be changed,
 while tuples are enclosed in parentheses ( ( ) ) and cannot be updated
 
-Q7
+Q7 How are the functions help() and dir() different?
+help() – it will display the documentation string
+dir() – will display the defined symbols
+
+Q8 Which command do you use to exit help window or help command prompt?
+quit
+
+Q9 Explain how Python does Compile-time and Run-time code checking?
+Python performs some amount of compile-time checking.
+most of code checking in the run-time
+if the Python code references a user -defined function that does not exist, the code will compile successfully.
+
+Q10 . Whenever Python exists Why does all the memory is not de-allocated / freed when Python exits?
+those python modules which are having circular references to other objects or the objects
+
+Q11
