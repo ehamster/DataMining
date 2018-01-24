@@ -1,0 +1,45 @@
+Q1. What is a Database?
+A Database is defined as a structured form of data
+
+Q2. Does SQL support programming language features ?
+No, it is a command  language
+
+Q3 What is the difference between BETWEEN and IN operators in SQL?
+
+The BETWEEN operator is used to fetch rows based on a range of values.
+The IN operator is used to check for values contained in specific sets
+
+Q4What is the difference between CHAR and VARCHAR2 datatype in SQL?
+varvhar2 means length is variable
+char means length is fixed
+
+Q5 What is the difference between primary key and unique constraints?
+Primary key cannot have NULL value, the unique constraints can have NULL values.
+There is only one primary key in a table, but there can be multiple unique constrains.
+
+Q6 What is a view in SQL?
+Views in SQL are kind of virtual tables.
+View can have specific rows from one or more tables
+
+Q7  What do you mean by foreign key?
+A FOREIGN KEY is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table
+
+Q8
+
+INNER JOIN :combining all rows from both the tables where the condition satisfies
+LEFT JOIN:   returns all the rows of the table on the left side of the join and matching rows for the table on the right side
+RIGHT JOIN: 
+FULL JOIN: he result-set will contain all the rows from both the tables. 
+
+Q9 What is an index?
+An index is used to speed up searching in the database
+
+Q10 what is Normalization
+Normalization is the process of minimizing redundancy and dependency by organizing fields and table of a database.
+
+First Normal Form (1NF):.Remove duplicated This should remove all the duplicate columns from the table.
+Second Normal Form (2NF) is !NF and  no non-prime attribute is dependent on any  subset of any candidate key 
+Third Normal Form : This should meet all requirements of 2NF. Removing the columns which are not dependent on primary key constraints.
+Fourth Normal Form (4NF):
+Meeting all the requirements of third normal form and it should not have multi- valued dependencies.
+
