@@ -1,0 +1,17 @@
+机器学习步骤：
+1.Collect data
+2.prepare the input data
+3.Analyze the input data(有没有空值，是否下降维度等）
+4.train algorithm
+5.test algorithm
+
+Numpy:存在两种数据类型：matrix and array
+random.rand(4,4)#随机生成4x4 array
+ma= mat(random.rand(4,4))#转换为 matrix
+ma.I  #求逆
+矩阵和逆矩阵相乘得到对角线为1，其他为0的矩阵
+但是计算机有误差。
+eye(4) #4x4单位矩阵
+
+
+
