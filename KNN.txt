@@ -1,0 +1,96 @@
+##手写识别，3000个28*28的图
+#假设前面读取好了数据，现在第一步拆分一下训练集
+from sklearn.model_selection import train_test_split #先将train 2 8 分，可以用来evaluate
+X_train_split, X_test_split, y_train_split, y_test_split = train_test_split(X_train, y_train, test_size = 0.2, random_state = 0)
+##random_state就是给随机函数的一个种子，这里写0就每次分法都是一样的。 如果要不一样可以写time stamp
+现在 X_train_split.shape #(2400,784)
+X_test_split.shape #(600,784)
+
+#第二步，KNN
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix, accuracy_score
+k_range = range(1,4)
+score = []
+for k in k_range:
+  print(k)
+  knn = KNeighborsClassifier(n_neighbors = k) #设置好k的大小
+  knn.fit(X_train_split, y_train_split) #两个参数 feature 和 label 必须同样的维度（行一样多）
+  y_pred = knn.predict(X_test_split)
+  accuracy = accuracy_score(y_test_split, y_pred)
+  print(accuracy)
+  score.add(accuracy)
+  print(confusion_matrix(y_test_split,y_pred)) #打印出confusion matrix看
+  print(y_pred)
+  就得出600个训练结果，对应X_test_split
+  
+#第三步评判模型好不好,这里用accuracy 来自于confusion matrix 
+TP FP
+FN TN
+accuracy = TP + TN / all (预测对了的比例)
+precision = TP / (TP + FP)(我猜是1的中对了的比例)
+recall = TP / (TP + FN)(实际多少个1，我抓了其中多少)
+F1-score = 2/(1/Precision + 1/Recall)(大家都有道理)
+取得调和平均，重要性依赖于绝对值小的，不希望有短板
+
+二分类问题 f1 socre和 accuracy都可以看看
+多分类中怎么算呢？
+方法A：
+  变成1 VS其他所有的二分类问题
+  比如手写识别 0 - 9
+  就有10种情况 10种f1 10 种accuracy
+  取个平均值就可以了
+方法B：
+  列多行多列的 confusion matrix
+  实际1 实际2 实际3
+ 预测1
+ 预测2
+ 预测3
+ Accuracy = 正确预测 / 总样本
+ Precision 和recall就10种情况求出来取平均值
+ 
+#第四步画图
+import matplotlib.pyplot as plt
+plt.plot(k_range,score)
+plt.xlabel('k')
+plt.ylable('accuracy')
+plt.show()
+
+#第五步，假设得到k = 3 结果最好
+k = 3
+knn = KNeighborsClassifier(n_neighbors = k)
+knn.fit(x_train,y_train)
+Ypred = knn.predict(X_test)
+
+#输出
+output = pd.DataFrame(('imageid': listing(range(1,len(Ypred) + 1)), 'label' : Ypred)
+output.to_csv('output.csv',index = False, header = True)
+
+########################################################
+KNN其实就这3行代码，现在手动实现
+knn = KNeighborsClassifier(n_neighbors = k) #设置好k的大小
+knn.fit(X_train_split, y_train_split) #两个参数 feature 和 label 必须同样的维度（行一样多）
+y_pred = knn.predict(X_test_split)
+
+class Knn():
+  def __init__(self):
+    pass
+  def fit (self,X,y):
+    self.X_train = X
+    self.y_train = y
+  def predict(self, X_test, k):
+    dataSetSize = X_train.shape[0]
+    diffMat = np.tile(X_test,(dataSetSize, 1))#矩阵复制成dataSize行，每行1份
+    diffMat = diffMat - X_train
+    sqDiffMat = diffMat**2
+    sumDiffMat = sqDiffMat.sum(axis = 0)#x = 0求行和 1 求列和
+    distance = sumDiffMat**0.5
+    sorteddistances = distance.argsort() #排序后的标号
+    for i in range(k) :
+      vote = label[sorteddistances[i]]
+      classCount[vote] = classCount.get(vote, 0) + 1
+      接下来就不写了
+      
+knn = Knn()
+knn.fit(X_train_split, y_train_split)
+k = 3
+knn.predict(X_test[0],k)
