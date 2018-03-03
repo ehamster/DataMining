@@ -1,0 +1,4 @@
+1.Convert data (run a script)
+2.Define net(edit prototxt)
+3.Define solver (edit prototxt)
+4.Train (with pretrained weights) (run a script)
