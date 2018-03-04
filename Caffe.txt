@@ -2,3 +2,8 @@
 2.Define net(edit prototxt)
 3.Define solver (edit prototxt)
 4.Train (with pretrained weights) (run a script)
+
+写一个网络，写一个solver，然后调用这个命令就可以了
+./build/tools/caffe train -gpu 0 -model path/to/trainval.prototext -solver path/to/solver.prototxt -weights path/to/pretrained_weights.caffemodel
+
+caffee: model Zoo 提供经典model
