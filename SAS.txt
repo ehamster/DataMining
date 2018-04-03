@@ -1,0 +1,20 @@
+LIBNAME mydata  "/courses/d1406ae5ba27fe300" access = readonly;
+
+DATA new; set mydata.addhealth_pds;// DATA setp
+LABEL H1DA1="Times of working around the hourse during the past week"
+	     H1DA2="Times of doing hobbies during the past week";  //表头
+       
+IF feature1 = 1;
+IF feature2 LE 0;
+
+//Logic部分：
+= EQ
+~= ^= NE
+> GT
+< LE
+>= GE
+<= LE
+PROC SORT; by AID;  //将主键作为排序
+
+PROC FREQ; TABLES feature1 feature2; //显示frequency
+RUN; //execute above all
