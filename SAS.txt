@@ -1,3 +1,5 @@
+Week2:
+
 LIBNAME mydata  "/courses/d1406ae5ba27fe300" access = readonly;
 
 DATA new; set mydata.addhealth_pds;// DATA setp
@@ -18,3 +20,24 @@ PROC SORT; by AID;  //将主键作为排序
 
 PROC FREQ; TABLES feature1 feature2; //显示frequency
 RUN; //execute above all
+
+Week3:
+Data management
+1.data missing
+  IF F1 = 9 then F1 = .;
+	
+2. Blank information
+IF F1 = . Then F1 = 11;   /*空着和unknow不一样，空着和不回答是两回事。
+
+3. Create secondary variable
+ACTIVITY = H1DA1 + H1DA2;
+IF ACTIVITY < 3 then ACTIVITY = 0;
+ELSE IF ACTIVITY >= 3 then ACTIVITY =1;  
+PROC PRINT; VAR H1DA1 H1DA2 ACTIVITY;  看看对不对
+
+4. Category
+IF H1DA1 = 0 THEN Group = 0;
+ELSE IF H1DA1 = 1 THEN Group = 1;
+ELSE IF H1DA1 = 2 THEN Group = 2;
+ELSE IF H1DA1 = 3 THEN Group = 3;
+ELSE Group = .;
