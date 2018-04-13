@@ -41,3 +41,20 @@ ELSE IF H1DA1 = 1 THEN Group = 1;
 ELSE IF H1DA1 = 2 THEN Group = 2;
 ELSE IF H1DA1 = 3 THEN Group = 3;
 ELSE Group = .;
+
+Week4:
+category:
+PRO GCHART; VBAR F1/Discrete type = PCT width = 30; /*VBAR = 垂直 ; Discrete = category  PCT = percentage*/
+PRO FREQ
+
+quantitative:
+PRO GCHART; VBAR F2/ type = PCT; 
+PROC UNIVARIATE; VAR H1DA8;/*查看 mean median mode
+
+2 variable relationship:
+bar chart for 2 category
+PROC GCHART; VBAR categorical_x_variable/discrete Type = mean Sumvar = categorical_y_variable;
+
+scattorplot for 2 quantitative
+
+PROC GPLOT; Plot y_variable * x_variable
