@@ -58,3 +58,54 @@ PROC GCHART; VBAR categorical_x_variable/discrete Type = mean Sumvar = categoric
 scattorplot for 2 quantitative
 
 PROC GPLOT; Plot y_variable * x_variable
+
+Course2
+
+Week 1
+As long as adequately large samples and an adequantly large number of samples are used from a population, the 
+distribution of the statistics of the samples will be normally distributed
+
+Hypothesis Testing
+1.Specify the null(H0) and the alternate(Ha) hypothesis(定义两个猜测)
+2.Choose a sample
+3. Access the evidence
+4.Draw conclusions
+
+P Value <= 5%  (Significance level of a test) Reject null hypothesis   -- h0 是错的
+P value > 5% data do not provide enough evidence to accept the Ha   -----H1是错的
+p value = the number of times out of 100 we would be wrong in rejecting the H0
+
+3种 statictical tools：
+ANOVA analysis of variance
+x2 - chi Square test of independence
+r - correlation coefficient
+
+C -> Q (ANOVA)
+C -> C (x2)
+Q -> Q (pearson correlation r)
+Q -> C (x2)
+
+
+1.ANOVA F test:
+    are the differences among the sample means due to true difference among the population means or
+    merely due to sampling variability
+    F = variation among sample means / variation within groups
+    
+    So, F is big, 两个因素是相关的，Ha接受
+
+	PROC ANOVA; Class explanatory variable;
+	MODEL response variable =  explanatory variable;
+	MEANS explanatory variable;
+if explanatory variable more than 2 group, ANOVA do not tell us which groups are different from the others!!
+
+1-2 Using post hoc test to see difference when x feature is more than 2 categories
+one of post hoc is DUNCAN test
+
+	MEANS explanatory variable/DUNCAN;
+
+Incorrectly rejects the H0 ---Type 1 error
+
+
+Courses2 
+Week 2
+
