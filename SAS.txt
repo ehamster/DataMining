@@ -109,3 +109,35 @@ Incorrectly rejects the H0 ---Type 1 error
 Courses2 
 Week 2
 
+Chi Squre
+c -> c
+
+1. get expected value
+use column total * row total / total
+X**2 = SUM((observed count - expected count)**2 / expected count)
+
+So 2 by 2 case, X**2 > 3.84 is large, difference is large
+如果不是2 by 2 ，还是得看P value
+如何使用chiSQuare？
+	PROC FREQ; TABLES yfeature * xfeature/CHISQ;
+
+如果是 Explanatory variable > 2 levels, 不能确定哪些是有关系的
+也使用post hoc test来判断，不过比之前ANOVA里要复杂！
+这里叫做Bonferroni Adjustment
+改变p value的值，不适用0.05 而是p/c (c是需要对比的次数)
+比如有5个类别， 则对比次数为 4 + 3 + 2 + 1 = 10 次
+1.所以 adjusted p value = 0.05 / 10
+2.选取 explantory variable中的两种，（假设这里response variable只有2种）， 用PROC FREQ; TABLES yfeature * xfeature/CHISQ;
+得出pvalue，如果 < adjusted p value, 有关，否则无关
+
+使用这种选择对于所有的两两之间：
+DATA COMPARISON1; SET New;
+IF H1DA1 = 0 or H1DA1 = 1;
+PROC SORT; BY AID;
+PROC FREQ; Tables H1GH1A * H1DA1/ CHISQ;
+RUN;
+
+
+
+
+
