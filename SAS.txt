@@ -166,7 +166,7 @@ Week 4
 1.使用ANOVA方法分析。
 则代码变为：
 	PROC SORT; By moderator;
-	PROC ANOVA; Class Moderator;
+	PROC ANOVA; Class x;
 	MODEL y = x;
 	MEANS x; By Moderator;
 	
