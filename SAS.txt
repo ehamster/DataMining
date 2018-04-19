@@ -138,6 +138,44 @@ PROC FREQ; Tables H1GH1A * H1DA1/ CHISQ;
 RUN;
 
 
+Course 2
+Week 3:
+Q -> Q Pearson correlation (measure a linear relationship between 2 Quantitative variables)
+How to describe scotter plot:
+form:1 Linear    2.curvilinear 
+
+Pearson correlation coefficient = r (-1= < r <= 1)(strength of a linear relationship between 2 Q variables)
+r的平方表示 百分之多少的 one variable can be predicted by the other.
+0 表示 weak relationship -1 或者1 都是 strong relationship。 只是一个是递增关系，一个递减。
+这个值只对linear关系有效，对curvilinear关系无效
+
+这里P value <= 0.05表示有关系
+
+所以：
+1.使用 PROC GPLOT; Ploy y variable * x variable;  //看图
+      PROC CORR; Var 1 variable 2variable 3variable; //看r和p
+      会显示 r < p  很奇怪的表示，但是无所谓了。
 
 
+Courser2
+Week 4
 
+第三种variable   ：  Moderator缓和
+在每一种moderator的情况下，x和y变量都有关系吗？
+了解第三个变量Moderator的影响；假设这里是C->Q的情况，
+1.使用ANOVA方法分析。
+则代码变为：
+	PROC SORT; By moderator;
+	PROC ANOVA; Class Moderator;
+	MODEL y = x;
+	MEANS x; By Moderator;
+	
+2.在C-》C的情况下，使用 CHI SQUARE
+PRO SORT; By Moderator;
+PROC FREQ; Tanles y* x/CHISQ; BY Moderator;
+如果moderator各个情况下x和y的关系一样，则说明moderator does not moderate the relationship between x and y 
+
+3.Q->Q pearson情况下
+ PROC SORT; by moderator;
+ PROC CORR; VAR x y; BY moderator;
+ 
