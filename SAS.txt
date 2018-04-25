@@ -136,7 +136,8 @@ IF H1DA1 = 0 or H1DA1 = 1;
 PROC SORT; BY AID;
 PROC FREQ; Tables H1GH1A * H1DA1/ CHISQ;
 RUN;
-
+Q - > C
+变成C -> C
 
 Course 2
 Week 3:
