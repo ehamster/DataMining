@@ -180,3 +180,15 @@ PROC FREQ; Tanles y* x/CHISQ; BY Moderator;
  PROC SORT; by moderator;
  PROC CORR; VAR x y; BY moderator;
  
+
+
+Week3
+
+Week3 - 1
+data: 1.observation data
+      2. experimental data
+      
+      confounding variable  =  lurking variable (干扰因素)
+      需要控制这些变量
+      
+ 
