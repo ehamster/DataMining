@@ -191,4 +191,24 @@ data: 1.observation data
       confounding variable  =  lurking variable (干扰因素)
       需要控制这些变量
       
+      
+      
+ Week3 - 2
+ Linear Regression and Logistic regression
+ Q -> Q
+ PROC GLM; model
+ quantitative response = explantory variable
  
+得出的表格里有intercept and slope
+可以得出公式 y = intercept + intercept下面的那个值(slope) * x
+
+C -> Q   C是binary的情况
+PROC GLM; model quantitative response = explantory variable / solution
+
+Linear Regression Assumptions:
+1.Normality  is normal distribution
+2.Linearity     associations is linear(a straight line) 
+3.Homoscedasticity  variability is response bvariable is same at all levels of explantory variable
+4.independence  数据个体之间不相关，比如同一个教室的学生的成绩相关，因为老师一样。 但是这个是数据决定了，没办法。
+5.outliers    extreme value
+6.multicollinearity explanatory variables are highly correlated with each other  (choose just one)
