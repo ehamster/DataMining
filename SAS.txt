@@ -252,3 +252,12 @@ degree = 2 means quadratic line
 PROC GLM; model y = x/ solution clparm; 得出的R -squared值低，可以试一试使用x squared 或者三次方
 因为可能直线不能很好表示
 
+
+Missepecification 缺少重要的explantory variable
+Evaluation model:   主要是把结果放到一个stdres变量里
+PROC GLM plots(unpack) = all;    /*plots 表示要打印出诊断图 diagnostic plot*/
+model y = x1 x2 x3 / solution clparm;
+output residual = res student = stdres out = results;
+
+
+如果1%的在2.5std外或者 5%在2std外，则模型不好。 两个都满足才好
