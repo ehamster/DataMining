@@ -214,3 +214,7 @@ Linear Regression Assumptions:
 6.multicollinearity explanatory variables are highly correlated with each other  (choose just one)
 
 为了更好理解，我们需要center the response variable mean to 0. 因为equation里 x=0 时y 有值
+
+
+Week 3-3
+Multiple regression
