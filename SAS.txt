@@ -218,3 +218,37 @@ Linear Regression Assumptions:
 
 Week 3-3
 Multiple regression
+1.两个 response variable 1.binary category 2. Quantitative variable  首先centering these variables 
+1.变成0 和 1
+2.减去mean（相当于mean变成0）
+
+PROC GLM; model H1GH60 = H1DA1 H1DA8_2 / solution;
+两个变量顺序无所谓。 出现的表格里Estimate 这一栏是正的，则positively associated with response variable
+So， 当单独使用 PROC GLM; model y = x / solution时，p value < 0.05, 之后 添加一个新的x2
+PROC GLM; model y = x1 x2/ solution 
+x 的 p value > 0.05, 则x2 就是confounding 
+x2 confounds the relationship between x and y!!!
+也就是说只有x的时候看起来x和y有关系
+但是当有多个x的时候，之前以为有关系的x可以看出其实是无关系的！
+
+PROC GLM; model y = x1 x2/ solution clparm;  Use clparm to see 95% confidence interval
+
+总结： intercept 就是bias  estimate 就是x前面的系数， 95%confidence 就是we are 95% certain that the true
+population parameter in this interval
+还有一个特点，无关的变量，他的range包括了0， 也就是说很可能系数为0， 也就是无关！
+
+/*Q->Q的图和方程的直线， clm表示画出95% confidence interval*/
+PROC SGPLOT; reg x = H1DA8_2 y = H1GH60 / lineattrs= (color = red thickness = 3) clm;
+yaxis label = "H1GH60";
+xaxis label = "H1DA8_2";
+run;
+
+有时候直线表示的并不好，用曲线才能表示关系，所以加入quadratic regression line
+PROC SGPLOT; reg x = H1DA8_2 y = H1GH60 / lineattrs= (color = red thickness = 3)degree = 1 clm;
+PROC SGPLOT; reg x = H1DA8_2 y = H1GH60 / lineattrs= (color = red thickness = 3)degree = 2 clm;
+degree = 1 means line
+degree = 2 means quadratic line
+如果发现
+PROC GLM; model y = x/ solution clparm; 得出的R -squared值低，可以试一试使用x squared 或者三次方
+因为可能直线不能很好表示
+
