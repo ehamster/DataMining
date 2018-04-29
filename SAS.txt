@@ -190,9 +190,8 @@ data: 1.observation data
       
       confounding variable  =  lurking variable (干扰因素)
       需要控制这些变量
-      
-      
-      
+      confunding variable is associated with x and y.可以找！！！
+      
  Week3 - 2
  Linear Regression and Logistic regression
  Q -> Q
@@ -213,7 +212,8 @@ Linear Regression Assumptions:
 5.outliers    extreme value
 6.multicollinearity explanatory variables are highly correlated with each other  (choose just one)
 
-为了更好理解，我们需要center the response variable mean to 0. 因为equation里 x=0 时y 有值
+为了更好理解，我们需要center the response variable mean to 0. 
+这样we can look at the association between another explantory variable and response variable.
 
 
 Week 3-3
@@ -255,9 +255,47 @@ PROC GLM; model y = x/ solution clparm; 得出的R -squared值低，可以试一
 
 Missepecification 缺少重要的explantory variable
 Evaluation model:   主要是把结果放到一个stdres变量里
-PROC GLM plots(unpack) = all;    /*plots 表示要打印出诊断图 diagnostic plot*/
+
+* request regression diagnostic plots;
+
+PROC GLM plots(unpack) = all;                          /*plots 表示要打印出诊断图 diagnostic plot*/
 model y = x1 x2 x3 / solution clparm;
-output residual = res student = stdres out = results;
+output residual = res student = stdres out = results;  / 选项residual = res要求使用非标准残差的列，而选项student = res要求使用标准化残差的列。
+			                               /Finally, the out = results option asks for another data set that includes the 							       /regression analysis results.
+
+会打印出所有图，其中有几个比较重要的
+1.q-q plot
+	We can find that in q-q plot, points do not follow a straight line absolutely. So it does not follow a perfectly normal distribution. We need to add some other explanatory to our model.
+	
+2.standardized residuals for all observations
+	如果1%的在2.5std外或者 5%在2std外，则模型不好,需要更多explantory variable。 两个都满足才好
+3.leverage plot
+	find outliers. 如果比较左边，说明没啥影响力.
+	
+Normalizing or standardizing the values:
+
+* plot of standardized residuals for each observation;
+proc gplot;
+label stdres="Standardized Residual" aid="AID";
+plot stdres*AID/vref=0; 
+run;
 
 
-如果1%的在2.5std外或者 5%在2std外，则模型不好。 两个都满足才好
+
+Partial regression plot:
+
+data new3;
+set new;
+x2 = x * x;
+run;
+PROC reg plots = partial;
+model y = x x2 / partial;
+run;
+
+使用partial regression plot我们可以发现在控制其他的x情况下，某一个explantory variable 和y的关系是否是线性还是曲线或者很weak
+
+
+
+outlier and leverage plot
+数据中影响大的和outlier
+outlier是在2std以外的
