@@ -299,3 +299,31 @@ run;
 outlier and leverage plot
 数据中影响大的和outlier
 outlier是在2std以外的
+
+
+Week3 - 4
+If explantory variable x1 is category and more than 2 group
+假如有4种情况 ABCD
+要compare A to BCD。 A is reference group, BCD are comparison groups
+
+PROC GLM;
+class x1 (ref = "A");             //不写class则会以为是quantitative explantory variable
+model y = x1 x2 x3 / solution;
+
+如果不写ref的值，则默认是ref = last group
+
+
+If response is binary categorical variable, we do not use multiple regression
+we use Logistic regression
+
+PROC LOGISTIC descending; model binary response = explantory;
+
+
+Odd ratios: probability of event occuring in one group compared to the p of event occuring in another group
+range : 0 -> infinity
+odd ratios = 1: our model is statistically nonsigmificant (x and y no relationship)
+odd ratios > 1: as x increases, y more likely
+odd ratios < 1: as x increases, y is less likely
+example:
+odd ratios = 3.4: my sample with x occur are 3.4 times more likely to have y than who without x occurs after control other xs
+记住对于y来说，0是没出现，1是出现
