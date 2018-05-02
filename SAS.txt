@@ -327,3 +327,63 @@ odd ratios < 1: as x increases, y is less likely
 example:
 odd ratios = 3.4: my sample with x occur are 3.4 times more likely to have y than who without x occurs after control other xs
 记住对于y来说，0是没出现，1是出现
+
+Course 4
+
+week1
+
+Linear regression 
+accuracy = mean squared error
+Variance = change in parameter estimates across different data sets
+Bias = how far off model estimated values are from true value
+
+increase variance will decrease bias, we need find model with low variance and low bias
+Overfitting: model has low training mean squared error and large test mean squared error
+
+Decision Tree:
+	making binary splits in a sample to maxinize correct classfication
+	all cut-points are tested
+	separation yielding the minimum impurity or error is selected
+Building decision tree:
+
+
+ods graphics on;   //用来显示结果到比如HTML
+proc hpsplit seed = 15531; //hpsplit: tree based;   seed : 用来cross validation 
+class categorical y categorical x;
+model categorical y = all explanatory variables;
+grow entropy;
+prune costcomplexity;
+grow criteria:
+1.GINI index
+2.Entropy
+3. residual sums of squares
+ Be Careful: (model event level choose low value of response variable)所以如果原本1是yes 0是no，则他会显示0.如果想显示1则需要吧no变成2.
+prune criteria:(do pruning to avoid over fitting)
+1.Cost-complexity  (both Q and C response variable) (make trade-off between error rate and size of tree)
+会出现一个图： vertical line show tree with lowest cross valiadated ASE
+horizontal reference line : average standard error + 1 standard error
+Select smallest tree that as an ASE below horizontal reference line.
+
+会出现一个Model Based confusion matrix
+display error rate
+
+会出现一个图 ROC curve
+1.Sensitivity: True positive rate
+2.Specificity: True negative rate
+会出现一个表： variable important
+当explanatory variables中有几个high related时， 可能只会显示一个的重要性的值，但是不代表其他就不重要
+
+
+优缺点：
+不同的seed意味着不同的随机，可能结果model不同
+
+proc hpsplit assignmissing = popular seed = 15531; // missing data observation will be assigned to the most popular.默认是drop
+
+strength:
+selects from a large number of variables and interactions that are most important
+
+can predict Categorical and quantitative response variable
+
+weakness:
+small changes in data can lead to different splits 
+not reproducible on future data
