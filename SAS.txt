@@ -387,3 +387,6 @@ can predict Categorical and quantitative response variable
 weakness:
 small changes in data can lead to different splits 
 not reproducible on future data
+
+
+Week 4-2:
