@@ -376,6 +376,7 @@ display error rate
 
 优缺点：
 不同的seed意味着不同的随机，可能结果model不同
+target variable 啥类型都可以
 
 proc hpsplit assignmissing = popular seed = 15531; // missing data observation will be assigned to the most popular.默认是drop
 
@@ -390,3 +391,44 @@ not reproducible on future data
 
 
 Week 4-2:
+random forests
+split on one variable in a node
+1.a subset of explantory variables is selected at random
+2.the node is split with the best variable of the subset
+
+each tree is grown by
+1.a subset of the explantory variables at each node
+2. a random subset of the sample for each tree in the forest
+
+60% of sample to grow and 40% to test the tree
+
+PROC Sort; by AID;
+PROC HPFOREST;
+target categorical y/level = nominal;
+input categorical x / level = nominal;
+input quantitative x/ level = interval;
+
+leaf size is 1 default
+如果y missing，就exclude
+如果x missing， 会使用missing value替代，还是include在里面
+
+OOB Misclassfication rate
+is a less biased estimate of how the model will perform on future data
+
+x and y can be categorical or quantitative
+the results of random forests generalize well to new data
+small changes in data do not impact the result of random forest
+
+
+Validation and cross validation
+
+1. leave one out cross validation
+select 1 observation as validation set, n - 1 as training set
+select another one as validation set, n - 1 as training set
+repeat for all, take average test error
+2.k-fold Cross Validation
+1. randomly divide sample into k equal groups
+2. estimate model on training set
+3.repeat for each group
+
+
