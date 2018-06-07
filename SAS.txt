@@ -436,6 +436,7 @@ Lasso regression
 强制给一个upper bound for sum of parameter
 导致一些parameter变为0，也就是相当于variables selection
 参数： lambda越大， fewer variables are selected。 bias increase varience decrease
+categories variable可以不是binary
 
 
 SAS
@@ -450,3 +451,5 @@ partition ROLE = selected(train='1' test = '0');
 model y = x1 x2/selection = lar(choose = cv stop = none) cvmethod = random(10);
 /*lar = Least Angled Regression用来compare parameter to do variable selection*/
 /*choose = cv (cross validation) stop = none 所有数据被test才停止   k = 10*/
+例如1份为validation，9份为training。 算出mean square error。 10个mean square error 取average就得出结果
+lasso会自动scale predictor的每个参数使其mean = 0 std = 1
