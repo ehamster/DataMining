@@ -453,3 +453,130 @@ model y = x1 x2/selection = lar(choose = cv stop = none) cvmethod = random(10);
 /*choose = cv (cross validation) stop = none 所有数据被test才停止   k = 10*/
 例如1份为validation，9份为training。 算出mean square error。 10个mean square error 取average就得出结果
 lasso会自动scale predictor的每个参数使其mean = 0 std = 1
+
+
+course4-4
+clustering
+less variance within clusters more varinace between clusters
+K-means
+和之前不同，这里需要手动standardize一下数据变成mean =  0 std = 1因为kmean不会自动rescale
+
+Proc standard data = train out = clustvar mean = 0 std = 1;
+var x1 x2 x3;
+
+这里是macro，有点像函数重复使用
+%macro kmean(K);
+proc fastclus data = clustvar out = outdata&K. outstat = clusterstat&K. maxclusters = &K. maxiter = 300
+run;
+%mend;
+outdata&K. 包含observation属于哪个cluster和距离
+clusterstat&K. 创建 statistics for range of K
+&K.意思是在名字后面加一个K
+maxiter = 300 最多循环300次
+maxclusters = &K. 就是K是多少就分多少个clusters
+
+
+LIBNAME mydata "/home/yw5650/my_courses/ldierker" access = readonly;
+DATA new; set mydata.addhealth_pds;
+IF H1GH60 = 996 or H1GH60 = 998 or H1GH60 = 999 Then H1GH60 = .;
+IF H1DA1 = 6 or H1DA1 = 8 Then H1DA1 = .;
+IF H1DA2 = 6 or H1DA2 = 8 Then H1DA2 = .;
+IF H1DA3 = 6 or H1DA3 = 8 Then H1DA3 = .;
+IF H1DA8 = 996 or H1DA8 = 998 Then H1DA8 = .;
+IF H1DA9 = 996 or H1DA9 = 998 Then H1DA9 = .;
+IF H1DA10 = 996 or H1DA10 = 998 Then H1DA10 = .;
+IF H1DA11 = 996 or H1DA11 = 998 Then H1DA11 = .;
+ods graphics on;
+idnum = _n_;
+keep H1GH60 H1DA1 H1DA2 H1DA3 H1DA8 H1DA9 H1DA10 H1DA11;
+/*Clean data with empty variables*/
+Data new2;
+set new;
+IF (H1GH60 NE '' AND H1DA1 ^= '' AND H1DA2 ^= '' AND H1DA3 ^= '' AND
+H1DA8 ^= '' AND H1DA9 ^= '' AND H1DA10 ^= '' AND H1DA11 ^= '' ) THEN OUTPUT;
+
+/*Split data randomly into train data and test data*/
+PROC surveyselect data = new2 out = traintest seed = 123
+samprate = 0.7 method = srs outall;
+run;
+
+data clustrain;
+set traintest;
+if selected = 1;
+run;
+
+data clustest;
+set traintest;
+if selected = 0;
+run;
+
+/*Standardize the variables to have mean = 0 std = 1*/
+PROC standard data = clustrain out = clustvar mean = 0 std = 1;
+var H1DA1 H1DA2 H1DA3 H1DA8 H1DA9 H1DA10 H1DA11;
+run;
+
+/*K-mean*/
+%macro kmean(K);
+PROC fastclus data = clustvar out = outdata&K. outstat = cluststat&K.
+maxclusters = &K. maxiter= 100;
+var H1DA1 H1DA2 H1DA3 H1DA8 H1DA9 H1DA10 H1DA11;
+run;
+%mend;
+
+%kmean(1);
+%kmean(2);
+%kmean(3);
+%kmean(4);
+%kmean(5);
+%kmean(6);
+%kmean(7);
+%kmean(8);
+%kmean(9);
+%kmean(10);
+%kmean(11);
+%kmean(12);
+%kmean(13);
+%kmean(14);
+%kmean(15);
+
+/*Get r square values from each cluster solution*/
+%macro rsq(K);
+data clus&K.;
+set cluststat&K.;
+nclust = &K.;
+if _type_ = 'RSQ';
+keep nclust over_all;
+run;
+%mend;
+%rsq(1);
+%rsq(2);
+%rsq(3);
+%rsq(4);
+%rsq(5);
+%rsq(6);
+%rsq(7);
+%rsq(8);
+%rsq(9);
+%rsq(10);
+%rsq(11);
+%rsq(12);
+%rsq(13);
+%rsq(14);
+%rsq(15);
+data clustersquare;
+set clus1 clus2 clus3 clus4 clus5 clus6 clus7 clus8 clus9 clus10 clus11 clus12
+clus13 clus14 clus15;
+run;
+symbol color = blue interpol = join;
+PROC gplot data = clustersquare;
+plot over_all * nclust;
+run;
+因为variable是多个，不好画图表示看看cluster分的好不好，这里要使用一个技术
+canonical discriminant analysis
+会产生新的canonical variable用来画图
+通常两个变量就能代表所有了
+
+
+
+
+
